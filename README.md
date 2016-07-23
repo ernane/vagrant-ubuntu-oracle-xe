@@ -58,20 +58,20 @@ These steps are also shown in an [asciicast] made by Daekwon Kang:
 
 You should now be able to
 [connect](http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html) to
-the new database at `localhost:1521/XE` as `system` with password `manager`. For example, if you
+the new database at `192.168.33.11:1521/XE` as `system` with password `manager`. For example, if you
 have `sqlplus` installed on the host machine you can do
 
-    sqlplus system/manager@//localhost:1521/XE
+    sqlplus system/manager@//192.168.33.11:1521/XE
 
 To make sqlplus behave like other tools (history, arrow keys etc.) you can do this:
 
-    rlwrap sqlplus system/manager@//localhost:1521/XE
+    rlwrap sqlplus system/manager@//192.168.33.11:1521/XE
 
 You might need to add an entry to your `tnsnames.ora` file first:
 
     XE =
       (DESCRIPTION =
-        (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 1521))
+        (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.33.11)(PORT = 1521))
         (CONNECT_DATA =
           (SERVER = DEDICATED)
           (SERVICE_NAME = XE)

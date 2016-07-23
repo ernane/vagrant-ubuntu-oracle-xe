@@ -11,19 +11,20 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "oracle"
 
   # share this project under /home/vagrant/vagrant-ubuntu-oracle-xe
-  config.vm.synced_folder ".", "/home/vagrant/vagrant-ubuntu-oracle-xe", :mount_options => ["dmode=777","fmode=666"]
+  config.vm.synced_folder ".", "/home/vagrant/vagrant-ubuntu-oracle-xe"
 
   # Forward Oracle port
-  config.vm.network :forwarded_port, guest: 1521, host: 1521
+  # config.vm.network :forwarded_port, guest: 1521, host: 1521
+  config.vm.network "private_network", ip: "192.168.33.11"
 
   # Provider-specific configuration so you can fine-tune various backing
   # providers for Vagrant. These expose provider-specific options.
   config.vm.provider :virtualbox do |vb|
     # Use VBoxManage to customize the VM
+    vb.cpus   = 2
+    vb.memory = 2048
     vb.customize ["modifyvm", :id,
                   "--name", "oracle",
-                  # Oracle claims to need 512MB of memory available minimum
-                  "--memory", "512",
                   # Enable DNS behind NAT
                   "--natdnshostresolver1", "on"]
   end
